@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(TestLib)
+project(TestProject)
 
-option(BUILD_SHARED_LIBS OFF)
+set(TESTPROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Source)
+set(TESTPROJECT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Include)
+set(TESTPROJECT_SOURCE_FILES ${TESTPROJECT_SOURCE_DIR}/Main.cpp)
 
-set(TESTLAB_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Source)
-set(TESTLAB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Include)
-set(TESTLAB_SOURCE_FILES ${TESTLAB_SOURCE_DIR}/Math.cpp)
-set(TESTLAB_INCLUDE_FILES ${TESTLAB_INCLUDE_DIR}/Math.h)
+add_subdirectory(TestLib)
 
-add_library(TestLab ${TESTLAB_SOURCE_FILES} ${TESTLAB_INCLUDE_FILES})
-target_include_directories(TestLab PUBLIC ${TESTLAB_INCLUDE_DIR})
+add_executable(TestProject ${TESTPROJECT_SOURCE_FILES})
+target_include_directories(TestProject PRIVATE ${TESTPROJECT_INCLUDE_DIR})
+target_include_directories(TestProject PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/TestLib/Include)
+target_link_libraries(TestProject TestLib)
