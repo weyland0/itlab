@@ -1,7 +1,7 @@
 
-#include "Math.h"
+#include "TMath.h"
 
-namespace tlab
+namespace tlib
 {
 
     int Add(int first, int second)
